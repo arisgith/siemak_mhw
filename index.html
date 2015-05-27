@@ -57,16 +57,16 @@
 			</div><!-- /header -->
 
 			<div role="main" class="ui-content">
-				<form action="approval.html">
+				<form action="approval.html" onsubmit="return validationcheck()">
 					<div class="ui-field-contain">
 						<label for="text-basic">Username </label>
-						<input type="text" name="username" id="text-basic" placeholder="Your NRP" class="ui-mini"  required />
+						<input type="text" name="username" id="username" placeholder="Your NRP" class="ui-mini" required />
 					</div>
 					<div class="ui-field-contain">
 						<label for="text-basic">Password</label>
-						<input type="password" name="pass" id="text-basic" placeholder="Your SIAKAD Password" class="ui-mini" required />
+						<input type="password" name="pass" id="pass" placeholder="Your SIAKAD Password" class="ui-mini" required />
 					</div>
-					<input type="submit" data-corners="false" value="Submit"  data-mini="true">
+					<input type="submit" data-corners="false" value="Submit"  data-mini="true"  onclick="return validationcheck()">
 				</form>
 				<!--h2>JSON</h2>
 				<pre id="result">
@@ -109,28 +109,23 @@
 
 		</div><!-- /page -->
 		<script>
-			$.fn.serializeObject = function()
-			{
-				var o = {};
-				var a = this.serializeArray();
-				$.each(a, function() {
-					if (o[this.name] !== undefined) {
-						if (!o[this.name].push) {
-							o[this.name] = [o[this.name]];
-						}
-						o[this.name].push(this.value || '');
-					} else {
-						o[this.name] = this.value || '';
-					}
-				});
-				return o;
-			};
-			$(function() {
-				$('form').submit(function() {
-					$('#result').text(JSON.stringify($('form').serializeObject()));
-					return true;
-				});
-			});
+			function validationcheck(){
+				if ($("#username").val() == "") {
+
+					alert("Mohon Masukan NRP.");
+
+					$("#username").focus(); 
+					return false;
+
+				} else if ($("#pass").val() == "") {
+
+					alert("Mohon Masukan Password.");
+
+					$("#pass").focus();
+					return false;
+				}
+				
+			}
 		</script>
 	</body>
 </html>
