@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Open panel on swipe - jQuery Mobile Demos</title>
+		<link rel="shortcut icon" href="./favicon.ico">
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+		<link rel="stylesheet" href="./css/themes/default/jquery.mobile-1.4.5.min.css">
+		<link rel="stylesheet" href="./css/themes/default/home.css">
+	</head>
+	<body>
+		<div data-role="page" id="demo-page">
+
+			<div data-role="header" data-theme="a">
+				<h1>Dasboard </h1>
+				<a href="#right-panel" data-icon="bullets" data-iconpos="notext" data-shadow="false" data-iconshadow="false" data-role="button" class="ui-btn-right">Open right panel</a>				
+			</div><!-- /header -->
+			
+			<div role="main" class="ui-content">
+				<h2 style="text-align:center;">Form Penilaian Berhasil Tersimpan</h2>
+				<div id="ui-bar-test" class="ui-bar ui-bar-a ui-corner-all" style="text-align:center;">
+					<p>Terima kasih sudah membantu menjaga mutu jurusan.</p>
+					<a href="home.html">Kembali</a>
+				</div>
+						
+
+			</div><!-- /content -->
+
+			<div data-role="panel" id="right-panel" data-display="push" data-position="right" data-theme="b">
+				<ul data-role="listview">
+					<li><a href="home.html" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-delete ui-btn-icon-right">Home</a></li>
+					<li>
+						<a href="index.html" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-delete ui-btn-icon-right">Log Out</a>
+					</li>
+				</ul>
+			</div><!-- /panel -->
+
+		</div><!-- /page -->
+		
+		<script src="./js/jquery.js"></script>
+		<script src="./js/jquery.mobile-1.4.5.min.js"></script>
+		<!--swipe-->
+		<script>
+			$( document ).on( "pagecreate", "#demo-page", function() {
+
+				$( document ).on( "swipeleft", "#demo-page", function( e ) {
+					// We check if there is no open panel on the page because otherwise
+					// a swipe to close the left panel would also open the right panel (and v.v.).
+					// We do this by checking the data that the framework stores on the page element (panel: open).
+					if ( $( ".ui-page-active" ).jqmData( "panel" ) !== "open" ) {
+						if ( e.type === "swipeleft" ) {
+							$( "#right-panel" ).panel( "open" );
+						} 
+					}
+				});
+			});
+		</script>
+		
+		
+	</body>
+</html>

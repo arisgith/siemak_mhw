@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Login SIEMAK</title>
+		<link rel="shortcut icon" href="./favicon.ico">
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+		<link rel="stylesheet" href="./css/themes/default/jquery.mobile-1.4.5.min.css">
+		<link rel="stylesheet" href="./_assets/css/jqm-demos.css">
+		<script src="./js/jquery.js"></script>
+		<script src="./_assets/js/index.js"></script>
+		<script src="./js/jquery.mobile-1.4.5.min.js"></script>
+		<!--swipe-->
+		<script>
+			$( document ).on( "pagecreate", "#demo-page", function() {
+
+				$( document ).on( "swipeleft swiperight", "#demo-page", function( e ) {
+					// We check if there is no open panel on the page because otherwise
+					// a swipe to close the left panel would also open the right panel (and v.v.).
+					// We do this by checking the data that the framework stores on the page element (panel: open).
+					if ( $( ".ui-page-active" ).jqmData( "panel" ) !== "open" ) {
+						if ( e.type === "swipeleft" ) {
+							$( "#right-panel" ).panel( "open" );
+						} else if ( e.type === "swiperight" ) {
+							$( "#left-panel" ).panel( "open" );
+						}
+					}
+				});
+			});
+		</script>
+		<style>
+			/* Swipe works with mouse as well but often causes text selection. */
+			/* We'll deny text selecton on everything but INPUTs and TEXTAREAs. */
+			#demo-page :not(INPUT):not(TEXTAREA) {
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				-o-user-select: none;
+				user-select: none;
+			}
+			/* Content styling. */
+			dl { font-family: "Times New Roman", Times, serif; padding: 1em; }
+			dt { font-size: 2em; font-weight: bold; }
+			dt span { font-size: .5em; color: #777; margin-left: .5em; }
+			dd { font-size: 1.25em;	margin: 1em 0 0; padding-bottom: 1em; border-bottom: 1px solid #eee; }
+			.back-btn { float: right; margin: 0 2em 1em 0; }
+		</style>
+		<!--swipe-->
+	</head>	
+	<body>
+		<div data-role="page" id="demo-page">
+
+			<div data-role="header" >
+				<a href="#left-panel" data-icon="info" data-iconpos="notext" data-shadow="false" data-iconshadow="false"></a>
+				<h1>LOGIN</h1>
+			</div><!-- /header -->
+
+			<div role="main" class="ui-content">
+				<form action="approval.html">
+					<div class="ui-field-contain">
+						<label for="text-basic">Username </label>
+						<input type="text" name="username" id="text-basic" placeholder="Your NRP" class="ui-mini"  required>
+					</div>
+					<div class="ui-field-contain">
+						<label for="text-basic">Password</label>
+						<input type="password" name="pass" id="text-basic" placeholder="Your SIAKAD Password" class="ui-mini" required>
+					</div>
+					<input type="submit" data-corners="false" value="Submit"  data-mini="true">
+				</form>
+				<!--h2>JSON</h2>
+				<pre id="result">
+				</pre-->
+			</div><!-- /content -->
+			
+			<!-- swipe panel -->
+			<div data-role="panel" id="left-panel" data-theme="b">
+				
+				<div class="ui-corner-all custom-corners">
+					<h3 class="ui-bar ui-bar-a">
+						Info Aplikasi !
+					</h3>
+					<div class="ui-body ui-body-b">
+						<p>Versi SIEMAK Android 0.1b</p>
+						<small style="text-align:justify;">
+						<p>
+							Aplikasi SIEMAK Android 0.1b ini digunakan untuk memudahkan mahasiswa untuk melakukan penilaian terhadap
+							kinerja dosen saat melakukan kegiatan akademik yang bertempat di kelas.
+						</p>
+						<p>
+							Aplikasi ini juga terintegrasi dengan data Siakad Trunojoyo sehingga mahasiswa memudahkan mahasiswa dengan sistem single sign in.
+							Untuk mahasiswa, 
+						</p>
+						<p>
+							silahkan login menggunakan <b>NRP</b> sebagai username dan <b>password siaka</b> sebagai password
+						</p>
+						<p>
+							Info developer : <a href="http://siemak.web.id" target="_blank">KLIK</a> 
+						</p>
+						</small>
+					</div>
+				</div>
+
+			</div><!-- /swipe panel -->
+
+			<div data-role="footer">
+				<h4>Sistem Informasi Evaluasi Akademik</h4>
+			</div><!-- /footer -->
+
+		</div><!-- /page -->
+		<script>
+			$.fn.serializeObject = function()
+			{
+				var o = {};
+				var a = this.serializeArray();
+				$.each(a, function() {
+					if (o[this.name] !== undefined) {
+						if (!o[this.name].push) {
+							o[this.name] = [o[this.name]];
+						}
+						o[this.name].push(this.value || '');
+					} else {
+						o[this.name] = this.value || '';
+					}
+				});
+				return o;
+			};
+			$(function() {
+				$('form').submit(function() {
+					$('#result').text(JSON.stringify($('form').serializeObject()));
+					return true;
+				});
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Isi form</title>
+		<link rel="shortcut icon" href="./favicon.ico">
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+		<link rel="stylesheet" href="./css/themes/default/jquery.mobile-1.4.5.min.css">
+		<link rel="stylesheet" href="./css/themes/default/home.css">
+		<script src="./js/jquery.js"></script>
+		<script src="./js/jquery.mobile-1.4.5.min.js"></script>
+		<!--swipe-->
+		<script>
+			$( document ).on( "pagecreate", "#demo-page", function() {
+
+				$( document ).on( "swipeleft swiperight", "#demo-page", function( e ) {
+					// We check if there is no open panel on the page because otherwise
+					// a swipe to close the left panel would also open the right panel (and v.v.).
+					// We do this by checking the data that the framework stores on the page element (panel: open).
+					if ( $( ".ui-page-active" ).jqmData( "panel" ) !== "open" ) {
+						if ( e.type === "swipeleft" ) {
+							$( "#right-panel" ).panel( "open" );
+						} else if ( e.type === "swiperight" ) {
+							$( "#left-panel" ).panel( "open" );
+						}
+					}
+				});
+			});
+		</script>
+		<style>
+			/* Swipe works with mouse as well but often causes text selection. */
+			/* We'll deny text selecton on everything but INPUTs and TEXTAREAs. */
+			#demo-page :not(INPUT):not(TEXTAREA) {
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				-o-user-select: none;
+				user-select: none;
+			}
+			/* Content styling. */
+			dl { font-family: "Times New Roman", Times, serif; padding: 1em; }
+			dt { font-size: 2em; font-weight: bold; }
+			dt span { font-size: .5em; color: #777; margin-left: .5em; }
+			dd { font-size: 1.25em;	margin: 1em 0 0; padding-bottom: 1em; border-bottom: 1px solid #eee; }
+			.back-btn { float: right; margin: 0 2em 1em 0; }
+		</style>
+	</head>
+	<body>
+		<div data-role="page" id="demo-page">
+
+			<div data-role="header" data-theme="a">
+				<h1>Dasboard - Isi Form</h1>
+				<a href="#right-panel" data-icon="bullets" data-iconpos="notext" data-shadow="false" data-iconshadow="false" data-role="button" class="ui-btn-right">Open right panel</a>
+				
+			</div><!-- /header -->
+			
+			<div role="main" class="ui-content">
+				
+				<table class="table">
+					<tr>
+						<th>Mata Kuliah</th>
+						<td>: Kuliah Kerja Nyata</td>
+					</tr>
+					<tr>
+						<th>Kode Mata Kuliah</th>
+						<td>: UNG111</td>
+					</tr>
+					<tr>
+						<th>Kelas</th>
+						<td>: IF 6A</td>
+					</tr>
+					<tr>
+						<th>Dosen Mata Kuliah</th>
+						<td>: </td>
+					</tr>
+					<tr>
+						<th>Waktu Pengisian</th>
+						<td>: 2015-05-27 16:36:31</td>
+					</tr>
+				</table>
+				<hr/>
+				
+				
+				<form action="selesai_form.html" name="pertanyaan" id="pertanyaan" class="ui-field-contain">
+					<input type="hidden" name="id" value="5">
+					<input type="hidden" name="matakuliah" value="Kuliah Kerja Nyata">
+					<input type="hidden" name="kelas" value="IF 6A">
+					<input type="hidden" name="dosen" value="">
+					<input type="hidden" name="key" value="652a7ea185d5c50952650430c0cb7dbc31f085ac">
+													
+					<div class="ui-field-contain">	
+						<div>
+							<label for="pertanyaan" ><strong>1. Bagaimana Perencanaan Pembelajaran Dosen Dala</strong></label>
+						</div>
+						<select id="selectbasic" name="p1" required class="form-control">
+							<option selected value="">- Pilih Jawaban -</option>
+							<option value="5">(1) Tidak jelas, Tidak pernah dijelaskan rencana </option>
+							<option value="10">(2) Kurang jelas, pernah dijelaskan hanya lisan</option>
+							<option value="15">(3) Jelas, (Diterangkan, ditulis di papan atau da</option>
+							<option value="20">(4) Sangat jelas (Tertulis, dibagikan, dan dijela</option>
+						</select>
+					</div><!--end div-->
+														
+					<div class="ui-field-contain">	
+						<div class="form-group">
+							<label style="font-size:90%;" for="pertanyaan" ><strong>2. Bagaimana relavansi pokok bahasan terhadap mata kuliah ?</strong></label>
+						</div>
+						<select id="selectbasic" name="p2" required class="form-control">
+							<option selected value="">- Pilih Jawaban -</option>
+							<option value="5">(1) Tidak relevan</option>
+							<option value="10">(2) Kurang relevan</option>
+							<option value="15">(3) Relevan</option>
+							<option value="20">(4) Sangat Relevan</option>
+						</select>
+						
+					</div><!--end div-->
+					<div class="ui-field-contain">
+						<label class="control-label pull-right" for="textarea">Komentar anda tentang perkuliahan</label>
+						<textarea class="form-control" id="textarea" name="komentar1" ></textarea>
+						<label class="control-label pull-right" for="textarea">Masukan</label>
+						<textarea class="form-control" id="textarea" name="masukan1" ></textarea>
+					</div>
+					
+					<div class="ui-field-contain">
+						<input type="reset" data-inline="true" value="Kembali" />
+						<input type="Submit" data-inline="true" value="Selesai" />
+					</div>
+				
+				</form>
+
+			</div><!-- /content -->
+
+			<div data-role="panel" id="right-panel" data-display="push" data-position="right" data-theme="b">
+				<ul data-role="listview">
+					<li><a href="home.html" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-delete ui-btn-icon-right">Home</a></li>
+					<li>
+						<a href="index.html" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-delete ui-btn-icon-right">Log Out</a>
+					</li>
+				</ul>
+			</div><!-- /panel -->
+
+		</div><!-- /page -->
+		
+	</body>
+</html>
