@@ -38,19 +38,18 @@
 			$.ajax({
 				type       : "GET",
 				//url        : "http://arisis.my.id/jsonp/index.php",
-				url        : "http://siemak.web.id/api_m/login_api",
-				//url        : "http://siemak.ta/api_m/login_api",
+				//url        : "http://siemak.web.id/api_m/login_api",
+				url        : "http://siemak.ta/api_m/login_api",
 				data       : {username : usernamex , password : password},
 				jsonpCallback   : "A97ac68d16d468ef7d1800251926cca0e",
 				dataType   : 'jsonp',
 				success    : function(response) {
 					if(response.valid == 'Ya'){
-						alert(Object.keys(response).length);
-						hasile = '<div class="ui-bar ui-bar-a ui-corner-all"><h3>'+response.nama+'</h3></div><p>'+ response.status + '<br/>' + response.semester +'<br/>'+response.lastlog +'<p><p>'+response.data+'</p>';
+						hasile = '<div class="ui-bar ui-bar-a ui-corner-all"><h3>'+response.nama+'</h3></div><p>'+ response.status + '<br/>' + response.semester +'<br/>'+response.lastlog +'<p>';
 						$('#content').html(hasile);
 					}
 					else{
-						hasile = '<p>'+ response.pesan +'<p>';
+						hasile = '<p>'+ response.gagalnya +'<p>';
 						$('#content').html(hasile);
 					}
 				},
@@ -73,10 +72,16 @@
 				<span id="content">
 					
 				</span>
+				
+				<form action="#">
 					<span id="setuju">
 						Dengan Mengklik Button Lanjutkan Anda Segera Terhubung Ke Server 
-						<input type="submit" id="btnrload" onclick="window.location.reload(true)" data-mini="true" data-corners="false" value="Lanjutkan" />
+						<!--button type="submit">Lanjutkan </button-->
+						<!--a href="home.html?username=080411100073&pass=ajfkjaklfjk">Lanjutkan </button-->
+						<!--input type="submit" data-mini="true" data-corners="false" value="Lanjutkan" /-->
+						<input type="submit" onclick="window.location.reload(true)" data-mini="true" data-corners="false" value="Lanjutkan" />
 					</span>
+				</form>
 			</div><!-- /content -->
 			
 

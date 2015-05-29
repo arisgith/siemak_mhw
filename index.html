@@ -11,6 +11,7 @@
 		<script src="./js/jquery.js"></script>
 		<script src="./_assets/js/index.js"></script>
 		<script src="./js/jquery.mobile-1.4.5.min.js"></script>
+		<!--script src="./js/md5.js"></script-->
 		<!--swipe-->
 		<script>
 			$( document ).on( "pagecreate", "#demo-page", function() {
@@ -68,9 +69,7 @@
 					</div>
 					<input type="submit" data-corners="false" value="Submit"  data-mini="true"  onclick="return validationcheck()">
 				</form>
-				<!--h2>JSON</h2>
-				<pre id="result">
-				</pre-->
+				
 			</div><!-- /content -->
 			
 			<!-- swipe panel -->
@@ -117,14 +116,20 @@
 					$("#username").focus(); 
 					return false;
 
-				} else if ($("#pass").val() == "") {
+				} 
+				else if ($("#pass").val() == "") {
 
 					alert("Mohon Masukan Password.");
 
 					$("#pass").focus();
 					return false;
 				}
-				
+				/*
+				else{
+					var source = document.getElementById("pass");
+					source.value   = MD5(source.value);
+					return true;
+				}*/
 			}
 		</script>
 	</body>
