@@ -3,10 +3,10 @@
         xmlns:gap   = "http://phonegap.com/ns/1.0"
         id          = "id.web.siemak.mobile"
         versionCode = "1" 
-        version     = "0.0.1" >
+        version     = "0.0.1b" >
 
     <!-- versionCode is optional and Android only -->
-
+	<gap:platform name="android" />
     <name>Siemak Mobile</name>
 
     <description>
