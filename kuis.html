@@ -10,34 +10,13 @@
 
 	<body>
 		<nav class="light-blue lighten-1" role="navigation">
-			<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Isi Form</a>
+			<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Kuisioner</a>
 				<ul class="right hide-on-med-and-down">
 					<li><a href="#">Navbar Link</a></li>
 				</ul>
 			
 				<ul id="nav-mobile" class="side-nav">
-					<li>
-						<span class="blue-text text-darken-2">
-							<h4>Info Aplikasi !</h4>
-						</span>
-						<span class="black-text text-darken-2">
-							<p >Versi SIEMAK Android 0.1b</p>
-							<small style="text-align:justify;">
-							<p class="flow-text">
-								Aplikasi SIEMAK Android 0.1b ini digunakan untuk memudahkan mahasiswa untuk melakukan penilaian terhadap
-								kinerja dosen saat melakukan kegiatan akademik yang bertempat di kelas.
-							
-								Aplikasi ini juga terintegrasi dengan data Siakad Trunojoyo sehingga memudahkan mahasiswa dengan sistem single sign in.
-								Untuk mahasiswa, 
-								silahkan login menggunakan <b>NRP</b> sebagai username dan <b>password siakad</b> sebagai password
-							</p>
-							<p>
-								Info developer : <a href="http://siemak.web.id" target="_blank">KLIK</a> 
-							</p>
-							</small>
-							<a href="status_koneksi.html">Status Koneksi</a>
-						</span>
-					</li>
+					<li><a href="">Batal</a></li>
 				</ul>
 				<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 			</div>
@@ -45,25 +24,67 @@
 		
 		<div class="container">
 			<div class="row">
-				<h1 class="header center orange-text">SI Jamu</h1>
-				<form class="col s12" action="approval.html" method="get">
+				<form class="col s12" action="process_kuis.html" method="get" onsubmit="return validatione()">
 					<div class="row">
-						<div class="input-field col s12">
-							<i class="mdi-action-account-circle prefix"></i>
-							<input id="first_name" name="username" type="text" class="validate">
-							<label for="first_name">NRP</label>
-						</div>
+						<table class="bordered">
+							<tr>
+								<td>Mata Kuliah</td>
+								<td id="mk">
+									<!--preloader-->
+									<div class="progress wait">
+										<div class="indeterminate"></div>
+									</div>
+									<!--preloader-->
+								</td>
+							</tr>
+							<tr>
+								<td>Kode Mata Kuliah</td>
+								<td id="kode_mk">
+									<!--preloader-->
+									<div class="progress wait">
+										<div class="indeterminate"></div>
+									</div>
+									<!--preloader-->
+								</td>
+							</tr>
+							<tr>
+								<td>Kelas</td>
+								<td id="kelas">
+									<!--preloader-->
+									<div class="progress wait">
+										<div class="indeterminate"></div>
+									</div>
+									<!--preloader-->
+								</td>
+							</tr>
+							<tr>
+								<td>Dosen Mata Kuliah</td>
+								<td id="dosen">
+									<!--preloader-->
+									<div class="progress wait">
+										<div class="indeterminate"></div>
+									</div>
+									<!--preloader-->
+								</td>
+							</tr>
+						</table>
 					</div>
 					
+					<div class="row" id="pertanyaan">
+						
+					</div>
 					<div class="row">
 						<div class="input-field col s12">
-							<i class="mdi-editor-mode-edit prefix"></i>
-							<input id="password" name="pass" type="password" class="validate">
-							<label for="password">Password</label>
+							<textarea id="textarea1" name="komentar" class="materialize-textarea"></textarea>
+							<label for="textarea1">Berikan komentar anda tentang perkuliahan</label>
+						</div>
+						<div class="input-field col s12">
+							<textarea id="textarea1" name="masukan" class="materialize-textarea"></textarea>
+							<label for="textarea1">Berikan Masukan</label>
 						</div>
 					</div>
 					<div class="row center">
-						 <button class="btn waves-effect waves-light" type="submit" name="action">
+						 <button class="btn waves-effect waves-light"  onclick="return validatione()">
 							 Submit<i class="mdi-content-send right"></i>
 						 </button>
 					</div>
@@ -79,11 +100,147 @@
 			</div>
 		</footer>
 
-
 		<!--  Scripts-->
 		<script src="js/jquery-2.1.1.min.js"></script>
 		<script src="js/materialize.js"></script>
 		<script src="js/init.js"></script>
-	
+		<script>
+			$("#me").css("display", "none");
+			//fungsi untuk get url parameter buat data di ajax
+			 function getUrlParameter(sParam)
+			{
+				var sPageURL = window.location.search.substring(1);
+				var sURLVariables = sPageURL.split('&');
+				for (var i = 0; i < sURLVariables.length; i++) 
+				{
+					var sParameterName = sURLVariables[i].split('=');
+					if (sParameterName[0] == sParam) 
+					{
+						return sParameterName[1];
+					}
+				}
+			}         
+		   
+		   $.ajaxSetup ({
+				// Disable caching of AJAX responses
+				cache: false
+			});
+			
+			/*colleccting data first*/
+			var nrp = decodeURI( getUrlParameter('nrp') );
+			var mk 			= decodeURI( getUrlParameter('mk') );
+			$('#mk').html(mk);
+			var id_mk_mhw	= decodeURI(getUrlParameter('id_mk_mhw') );
+			var kode_mk 		= decodeURI(getUrlParameter('kode_mk') );
+			$('#kode_mk').html(kode_mk);
+			var kelas 		= decodeURI(getUrlParameter('kelas') );
+			$('#kelas').html(kelas);
+			var dosen 		= decodeURI(getUrlParameter('dosen') );
+			$('#dosen').html(dosen);
+			var password 		= decodeURI(getUrlParameter('password') );
+			
+			//ambil daftar pertanyaan
+			$(document).ready(function(){
+				
+				$.ajax({
+					type       : "GET",
+					//url        : "http://siemak.web.id/api_m/get_pertanyaan",
+					url        : "http://siemak.ta/api_m/get_pertanyaan",
+					data       : {nrp : nrp , mata_kuliah : mk , id_mk_mhw : id_mk_mhw , },
+					jsonpCallback   : "A97ac68d16d468ef7d1800251926cca0e",
+					dataType   : 'jsonp',
+					success    : function(response) {
+						//if(response.valid == 'Ya'){
+							$(".wait").css("display", "none");
+							$("#me").css("display", "block");
+							//looping that
+							var i =0;
+							$.each(response.pty, function(i, item) {
+								i++;
+								//alert("ke"+i+item.j1+"\n");
+								//mk_to_id ='<tr><td>'+item.kode_mk+'</td><td>'+item.mk_mhw+'</td><td>'+statuse_mk+'</td></tr>';
+								pt_to_id	= '<label>'+ i +'. '+item.pertanyaan+'</label>'+'<select name="p'+ i +'" id="p'+ i +'" class="browser-default validate" ><option value="" disabled selected>Choose your Answer</option><option value="'+ item.v1 +'">'+ item.j1 +'</option><option value="'+ item.v2 +'">'+ item.j2 +'</option><option value="'+ item.v3 +'">'+ item.j3 +'</option><option value="'+ item.v4 +'">'+ item.j4 +'</option></select><hr/>';								
+								$('#pertanyaan').append(pt_to_id);
+							});
+							//mencari total pertanyaan
+							var ax = response.pty;
+							for(var i in ax)
+							{
+								var totale = ax[i].total;
+							}
+							
+							perkakas	= '<input type="hidden" name="username" value="'+ nrp +'" /><input type="hidden" name="matakuliah" value="'+ mk +'" /><input type="hidden" name="kelas" value="'+ kelas +'" /> <input type="hidden" name="dosen" value="'+ dosen +'" /><input type="hidden" name="total_pertanyaan" value="'+ totale +'" /><input type="hidden" name="id_mk_mhw" value="'+ id_mk_mhw +'" /><input type="hidden" name="kode_mk" value="'+ kode_mk +'" /><input type="hidden" name="password" value="'+ password +'" />';
+							$('#pertanyaan').append(perkakas);
+						//}
+						//else{
+						//	alert('Mohon Periksa Kemabali Username / Password Anda!');
+						//	window.location.replace("index.html"); 
+						//	hasile = '<p>'+ response.pesan +'<p>';
+						//	$('#content').html(hasile);
+						//}
+					},
+					error      : function() {
+						//console.error("error");
+						alert('Terjadi Kesalahan!');
+						window.location.replace("home.html");                        
+					}
+				});
+				
+			});
+			function validatione(){
+		
+				if( document.getElementsByName("p1")[0].value == "" ){
+					alert('Terjadi Kesalahan\n Silahkan Pilih Jawaban Pertanyaan No 1');
+					document.getElementsByName("p1")[0].focus();
+					return false;
+				}
+				if(document.getElementsByName("p2")[0].value == "" ){
+					alert('Terjadi Kesalahan\n Silahkan Pilih Jawaban Pertanyaan No 2');
+					document.getElementsByName("p2")[0].focus();
+					return false;
+				}
+				if(document.getElementsByName("p3")[0].value == "" ){
+					alert('Terjadi Kesalahan\n Silahkan Pilih Jawaban Pertanyaan No 3');
+					document.getElementsByName("p3")[0].focus();
+					return false;
+				}
+				if(document.getElementsByName("p4")[0].value == "" ){
+					alert('Terjadi Kesalahan\n Silahkan Pilih Jawaban Pertanyaan No 4');
+					document.getElementsByName("p4")[0].focus();
+					return false;
+				}
+				if(document.getElementsByName("p5")[0].value == "" ){
+					alert('Terjadi Kesalahan\n Silahkan Pilih Jawaban Pertanyaan No 5');
+					document.getElementsByName("p5")[0].focus();
+					return false;
+				}
+				if(document.getElementsByName("p6")[0].value == "" ){
+					alert('Terjadi Kesalahan\n Silahkan Pilih Jawaban Pertanyaan No 6');
+					document.getElementsByName("p6")[0].focus();
+					return false;
+				}
+				if(document.getElementsByName("p7")[0].value == "" ){
+					alert('Terjadi Kesalahan\n Silahkan Pilih Jawaban Pertanyaan No 7');
+					document.getElementsByName("p7")[0].focus();
+					return false;
+				}
+				if(document.getElementsByName("p8")[0].value == "" ){
+					alert('Terjadi Kesalahan\n Silahkan Pilih Jawaban Pertanyaan No 8');
+					document.getElementsByName("p8")[0].focus();
+					return false;
+				}
+				if(document.getElementsByName("p9")[0].value == "" ){
+					alert('Terjadi Kesalahan\n Silahkan Pilih Jawaban Pertanyaan No 9');
+					document.getElementsByName("p9")[0].focus();
+					return false;
+				}
+				if(document.getElementsByName("p10")[0].value == "" ){
+					alert('Terjadi Kesalahan\n Silahkan Pilih Jawaban Pertanyaan No 10');
+					document.getElementsByName("p10")[0].focus();
+					return false;
+				}
+			}
+		</script>
+		
 	</body>
 </html>

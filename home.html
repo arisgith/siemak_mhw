@@ -170,14 +170,14 @@
 			
 			$(document).ready(function(){
 				$.ajax({
-					type       : "GET",
-					//url        : "http://arisis.my.id/jsonp/index.php",
-					url        : "http://siemak.web.id/api_m/login_api",
-					//url        : "http://siemak.ta/api_m/login_api",
-					data       : {username : usernamex , password : password},
+					type       		: "GET",
+					//url       	: "http://arisis.my.id/jsonp/index.php",
+					//url       	: "http://siemak.web.id/api_m/login_api",
+					url        		: "http://siemak.ta/api_m/login_api",
+					data      		: {username : usernamex , password : password},
 					jsonpCallback   : "A97ac68d16d468ef7d1800251926cca0e",
-					dataType   : 'jsonp',
-					success    : function(response) {
+					dataType   		: 'jsonp',
+					success    		: function(response) {
 						if(response.valid == 'Ya'){
 							$(".wait").css("display", "none");
 							$("#me").css("display", "block");
@@ -197,7 +197,7 @@
 									statuse_mk = 'Form Tidak Tersedia';
 								}
 								else{
-									statuse_mk = '<a href="kuis.html?nrp='+item.id_mhw+'">Isi</a>';
+									statuse_mk = '<a href="kuis.html?nrp='+item.id_mhw+'&mk='+item.mk_mhw+'&id_mk_mhw='+item.id_mk_mhw+'&kelas='+item.kelas+'&dosen='+item.dosen+'&kode_mk='+item.kode_mk+'&password='+password+'">Isi</a>';
 								}
 								
 								mk_to_id ='<tr><td>'+item.kode_mk+'</td><td>'+item.mk_mhw+'</td><td>'+statuse_mk+'</td></tr>';
@@ -213,8 +213,7 @@
 						}
 					},
 					error      : function() {
-						//console.error("error");
-						alert('Not working!');
+						alert('Terjadi Kesalahan Login!');
 						window.location.replace("index.html");                        
 					}
 				});

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+
+		<!--Let browser know website is optimized for mobile-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	</head>
+
+	<body>
+		<nav class="light-blue lighten-1" role="navigation">
+			<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Kuisioner</a>
+				<ul class="right hide-on-med-and-down">
+					<li><a href="#">Navbar Link</a></li>
+				</ul>
+			
+				<ul id="nav-mobile" class="side-nav">
+					<li><a href="">Batal</a></li>
+				</ul>
+				<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+			</div>
+		</nav>
+		
+		<div class="container">
+			<div class="row" id="me" class="center-align">
+				<div class="col s12 m5">
+					<div class="card-panel teal">
+						<span class="white-text">
+							<h4>Selesai <i class="mdi-action-thumb-up"></i>!</h4>
+							<p>Data kuisioner telah kami terima, terima kasih sudah berpartisipasi dalam mengawal peningkatan kualitas mutu Prodi.</p>
+						</span>
+						<div class="card-action">
+							 <div class="row">
+								<div class="col s6"><a class="waves-effect waves-light btn" href="index.html"><i class="mdi-content-clear"></i> Keluar</a></div>
+								<div class="col s6" id="home"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<footer class="page-footer light-blue lighten-1">
+			<div class="footer-copyright light-blue lighten-1">
+				<div class="container center-align">
+					&copy; 2015 JAMU Teknik Informatika Trunojoyo Madura
+				</div>
+			</div>
+		</footer>
+
+		<!--  Scripts-->
+		<script src="js/jquery-2.1.1.min.js"></script>
+		<script src="js/materialize.js"></script>
+		<script src="js/init.js"></script>
+		<script>
+			$("#me").css("display", "none");
+			//fungsi untuk get url parameter buat data di ajax
+			 function getUrlParameter(sParam)
+			{
+				var sPageURL = window.location.search.substring(1);
+				var sURLVariables = sPageURL.split('&');
+				for (var i = 0; i < sURLVariables.length; i++) 
+				{
+					var sParameterName = sURLVariables[i].split('=');
+					if (sParameterName[0] == sParam) 
+					{
+						return sParameterName[1];
+					}
+				}
+			}         
+		   
+		   $.ajaxSetup ({
+				// Disable caching of AJAX responses
+				cache: false
+			});
+			
+			/*colleccting data first*/
+			var nrp			= decodeURI( getUrlParameter('username') );
+			var mk 			= decodeURI( getUrlParameter('matakuliah') );
+			var id_mk_mhw	= decodeURI(getUrlParameter('id_mk_mhw') );
+			var kode_mk 		= decodeURI(getUrlParameter('kode_mk') );
+			var kelas 		= decodeURI(getUrlParameter('kelas') );
+			var dosen 		= decodeURI(getUrlParameter('dosen') );
+			//data kuis
+			var total_pertanyaan = decodeURI(getUrlParameter('total_pertanyaan') );
+			var p1 		= decodeURI(getUrlParameter('p1') );
+			var p2 		= decodeURI(getUrlParameter('p2') );
+			var p3 		= decodeURI(getUrlParameter('p3') );
+			var p4 		= decodeURI(getUrlParameter('p4') );
+			var p5 		= decodeURI(getUrlParameter('p5') );
+			var p6 		= decodeURI(getUrlParameter('p6') );
+			var p7 		= decodeURI(getUrlParameter('p7') );
+			var p8 		= decodeURI(getUrlParameter('p8') );
+			var p9 		= decodeURI(getUrlParameter('p9') );
+			var p10		= decodeURI(getUrlParameter('p10') );
+			var masukan	= decodeURI(getUrlParameter('masukan') );
+			var komentar= decodeURI(getUrlParameter('komentar') );
+			
+			var password= decodeURI(getUrlParameter('password') );
+			
+			//ambil daftar pertanyaan
+			$(document).ready(function(){
+				
+				$.ajax({
+					type       : "GET",
+					//url        : "http://siemak.web.id/api_m/get_pertanyaan",
+					url        : "http://siemak.ta/api_m/mob_post",
+					data       : {nrp : nrp , mata_kuliah : mk , id_mk_mhw : id_mk_mhw , kode_mk: kode_mk, kelas:kelas, dosen: dosen, p1: p1, p2: p2, p3: p3, p4: p4, p5: p5 , p6: p6, p7: p7, p8: p8, p9: p9, p10: p10, masukan:masukan, komentar: komentar ,total_pertanyaan: total_pertanyaan},
+					jsonpCallback   : "A97ac68d16d468ef7d1800251926cca0e",
+					dataType   : 'jsonp',
+					success    : function(response) {
+						//alert(response.valid);
+						if(response.valid == 'Yes'){
+							$(".wait").css("display", "none");
+							$("#me").css("display", "block");
+							
+							home_a	= '<a class="waves-effect waves-light btn" href="home.html?username='+ nrp +'&pass='+ password +'"><i class="mdi-action-home"></i> Back to Dashboard</a>';
+							$("#home").append(home_a);
+						}
+						//else{
+						//	alert('Mohon Periksa Kemabali Username / Password Anda!');
+						//	window.location.replace("index.html"); 
+						//	hasile = '<p>'+ response.pesan +'<p>';
+						//	$('#content').html(hasile);
+						//}
+					},
+					error      : function() {
+						//console.error("error");
+						alert('Terjadi Kesalahan!');
+						//window.location.replace("home.html");                        
+					}
+				});
+				
+			});
+		</script>
+		
+	</body>
+</html>
