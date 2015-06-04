@@ -30,7 +30,14 @@
 					return false;
 				}
 			}
-			
+		</script>
+		<script>
+			function onBackKeyDown2() {
+				 navigator.app.exitApp();
+			}
+			function toast(){
+				Materialize.toast('Anda Ingin Keluar? <a onclick="onBackKeyDown2()" class="btn red">Ya</a>', 4000)
+			}
 			// Wait for device API libraries to load
 			//
 			function onLoad() {
@@ -48,10 +55,7 @@
 				 toast();
 				 //navigator.app.exitApp();
 			}
-			function onBackKeyDown2() {
-				 navigator.app.exitApp();
-			}
-
+			
 		</script>
 	</head>
 
@@ -125,9 +129,6 @@
 			</div>
 		</footer>
 		<script>
-			function toast(){
-				Materialize.toast('Anda Ingin Keluar? <a onclick="onBackKeyDown2()" class="btn red">Ya</a>', 4000)
-			}
 			//disable back button
 			if (typeof history.pushState === "function") {
 				history.pushState("jibberish", null, null);
