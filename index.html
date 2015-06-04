@@ -10,7 +10,7 @@
 		<script src="js/jquery-2.1.1.min.js"></script>
 		<script src="js/materialize.js"></script>
 		<script src="js/init.js"></script>
-		<script type="text/javascript" charset="utf-8" src="src/cordova.js"></script>
+		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 		<script>
 			function validationcheck(){
 				if ($("#username").val() == "") {
@@ -30,9 +30,29 @@
 					return false;
 				}
 			}
+			
+			// Wait for device API libraries to load
+			//
+			function onLoad() {
+				document.addEventListener("deviceready", onDeviceReady, false);
+			}
+
+			// device APIs are available
+			//
+			function onDeviceReady() {
+				// Register the event listener
+				document.addEventListener("backbutton", onBackKeyDown, false);
+			}
+			// Handle the back button
+			function onBackKeyDown() {
+				 toast();
+				 //navigator.app.exitApp();
+			}
+			function onBackKeyDown2() {
+				 navigator.app.exitApp();
+			}
+
 		</script>
-		<!--INI BIAR BISA CLOSE DI ANDROID-->
-		<script type="text/javascript" charset="utf-8" src="js/close_app.js"></script>
 	</head>
 
 	<body onload="onLoad()">
@@ -104,5 +124,41 @@
 				</div>
 			</div>
 		</footer>
+		<script>
+			function toast(){
+				Materialize.toast('Anda Ingin Keluar? <a onclick="onBackKeyDown2()" class="btn red">Ya</a>', 4000)
+			}
+			//disable back button
+			if (typeof history.pushState === "function") {
+				history.pushState("jibberish", null, null);
+				var page_loaded = false;
+				window.onpopstate = function () {
+					if(!page_loaded){
+						page_loaded = true;
+						return false;
+					}
+					history.pushState('newjibberish', null, null);
+					// Handle the back (or forward) buttons here
+					// Will NOT handle refresh, use onbeforeunload for this.
+					toast();
+				};
+			}
+			else {
+				var ignoreHashChange = true;
+				window.onhashchange = function () {
+					if (!ignoreHashChange) {
+						ignoreHashChange = true;
+						window.location.hash = Math.random();
+						// Detect and redirect change here
+						// Works in older FF and IE9
+						// * it does mess with your hash symbol (anchor?) pound sign
+						// delimiter on the end of the URL
+					}
+					else {
+						ignoreHashChange = false;   
+					}
+				};
+			}	
+		</script>
 	</body>
 </html>
