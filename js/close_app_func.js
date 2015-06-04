@@ -1,8 +1,8 @@
 function onBackKeyDown2() {
 	 navigator.app.exitApp();
 }
-	function toast(a){
-				Materialize.toast('Anda Ingin Keluar? '+a+' <button onclick="onBackKeyDown2()" class="btn red">Ya</button>', 4000)
+	function toast(){
+				Materialize.toast('Anda Ingin Keluar? <button onclick="onBackKeyDown2()" class="btn red">Ya</button>', 4000)
 			}
 			//disable back button
 			if (typeof history.pushState === "function") {
@@ -16,7 +16,7 @@ function onBackKeyDown2() {
 					history.pushState('newjibberish', null, null);
 					// Handle the back (or forward) buttons here
 					// Will NOT handle refresh, use onbeforeunload for this.
-					toast(1);
+					toast();
 				};
 			}
 			else {
