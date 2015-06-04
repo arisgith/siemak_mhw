@@ -8,7 +8,12 @@
     <!-- versionCode is optional and Android only -->
 	<gap:platform name="android" />
     <name>Siemak Mobile</name>
+	
+	<feature name="NetworkStatus">
+		<param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
+	</feature>
 
+	
     <description>
        Aplikasi SIEMAK Untuk Mahasiswa
     </description>
