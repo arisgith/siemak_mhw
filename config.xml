@@ -7,6 +7,8 @@
 
     <!-- versionCode is optional and Android only -->
 	<gap:platform name="android" />
+	<gap:plugin name="Device" value="org.apache.cordova.core.Device"/>
+
     <name>Siemak Mobile</name>
 	
 	<feature name="NetworkStatus">

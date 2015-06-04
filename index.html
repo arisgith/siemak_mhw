@@ -32,37 +32,37 @@
 			}
 		</script>
 		<script type="text/javascript" charset="utf-8">
-
-			// Wait for device API libraries to load
-			//
-			document.addEventListener("deviceready", onDeviceReady, false);
-
-			// device APIs are available
-			//
+			
+			function onLoad() {
+				// Wait for device API libraries to load
+				// device APIs are available
+				document.addEventListener("deviceready", onDeviceReady, false);
+			}
+			
 			function onDeviceReady() {
 				checkConnection();
 			}
 
-				function checkConnection() {
-					var networkState = navigator.connection.type;
+			function checkConnection() {
+				var networkState = navigator.connection.type;
 
-					var states = {};
-					states[Connection.UNKNOWN]  = 'Unknown connection';
-					states[Connection.ETHERNET] = 'Ethernet connection';
-					states[Connection.WIFI]     = 'WiFi connection';
-					states[Connection.CELL_2G]  = 'Cell 2G connection';
-					states[Connection.CELL_3G]  = 'Cell 3G connection';
-					states[Connection.CELL_4G]  = 'Cell 4G connection';
-					states[Connection.CELL]     = 'Cell generic connection';
-					states[Connection.NONE]     = 'No network connection';
+				var states = {};
+				states[Connection.UNKNOWN]  = 'Unknown connection';
+				states[Connection.ETHERNET] = 'Ethernet connection';
+				states[Connection.WIFI]     = 'WiFi connection';
+				states[Connection.CELL_2G]  = 'Cell 2G connection';
+				states[Connection.CELL_3G]  = 'Cell 3G connection';
+				states[Connection.CELL_4G]  = 'Cell 4G connection';
+				states[Connection.CELL]     = 'Cell generic connection';
+				states[Connection.NONE]     = 'No network connection';
 
-					alert('Connection type: ' + states[networkState]);
-				}
+				alert('Connection type: ' + states[networkState]);
+			}
 
 		</script>
 	</head>
 
-	<body>
+	<body onload="onLoad()">
 		<nav class="light-blue lighten-1" role="navigation">
 			<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Login</a>
 				<ul class="right hide-on-med-and-down">
@@ -122,7 +122,7 @@
 						 </button>
 					</div>
 				</form>
-				<p>A dialog box will report the network state.</p>
+				<button onclick="onLoad()">A dialog</button>
 			</div>
 		</div>
 
