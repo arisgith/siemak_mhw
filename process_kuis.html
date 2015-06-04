@@ -24,7 +24,7 @@
 		
 		<div class="container">
 			<div class="row" id="me" class="center-align">
-				<div class="col s12 m5">
+				<div class="container">
 					<div class="card-panel teal">
 						<span class="white-text">
 							<h4>Selesai <i class="mdi-action-thumb-up"></i>!</h4>
@@ -32,8 +32,8 @@
 						</span>
 						<div class="card-action">
 							 <div class="row">
-								<div class="col s6"><a class="waves-effect waves-light btn" href="index.html"><i class="mdi-content-clear"></i> Keluar</a></div>
-								<div class="col s6" id="home"></div>
+								<div class="col s4"><a class="btn-floating btn-floating waves-effect waves-light btn" href="index.html"><i class="mdi-content-clear"></i> Keluar</a></div>
+								<div class="col s4" id="home"></div>
 							</div>
 						</div>
 					</div>
@@ -115,7 +115,7 @@
 							$(".wait").css("display", "none");
 							$("#me").css("display", "block");
 							
-							home_a	= '<a class="waves-effect waves-light btn" href="home.html?username='+ nrp +'&pass='+ password +'"><i class="mdi-action-home"></i> Back to Dashboard</a>';
+							home_a	= '<a class="btn-floating waves-effect waves-light btn" href="home.html?username='+ nrp +'&pass='+ password +'"><i class="mdi-action-home"></i> Back to Dashboard</a>';
 							$("#home").append(home_a);
 						}
 						//else{
@@ -127,8 +127,8 @@
 					},
 					error      : function() {
 						//console.error("error");
-						alert('Terjadi Kesalahan!');
-						//window.location.replace("home.html");                        
+						alert('Terjadi Kesalahan Proses! \nUlangi langkah dari awal');
+						window.location.replace("home.html?username="+nrp+"&pass="+password);                        
 					}
 				});
 				
