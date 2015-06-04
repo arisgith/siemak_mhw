@@ -10,7 +10,7 @@
 		<script src="js/jquery-2.1.1.min.js"></script>
 		<script src="js/materialize.js"></script>
 		<script src="js/init.js"></script>
-		 <script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
 		<script>
 			function validationcheck(){
 				if ($("#username").val() == "") {
@@ -31,35 +31,10 @@
 				}
 			}
 		</script>
-		<script type="text/javascript" charset="utf-8">
-			
-			function onLoad() {
-				// Wait for device API libraries to load
-				// device APIs are available
-				document.addEventListener("deviceready", onDeviceReady, false);
-			}
-			
-			function onDeviceReady() {
-				checkConnection();
-			}
-
-			function checkConnection() {
-				var networkState = navigator.connection.type;
-
-				var states = {};
-				states[Connection.UNKNOWN]  = 'Unknown connection';
-				states[Connection.ETHERNET] = 'Ethernet connection';
-				states[Connection.WIFI]     = 'WiFi connection';
-				states[Connection.CELL_2G]  = 'Cell 2G connection';
-				states[Connection.CELL_3G]  = 'Cell 3G connection';
-				states[Connection.CELL_4G]  = 'Cell 4G connection';
-				states[Connection.CELL]     = 'Cell generic connection';
-				states[Connection.NONE]     = 'No network connection';
-
-				alert('Connection type: ' + states[networkState]);
-			}
-
-		</script>
+		<!--INI BIAR BISA CLOSE DI ANDROID-->
+		<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/close_app.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/close_app_func.js"></script>
 	</head>
 
 	<body onload="onLoad()">
@@ -77,19 +52,18 @@
 						<span class="black-text text-darken-2">
 							<p >Versi SIEMAK Android 0.1b</p>
 							<small style="text-align:justify;">
-							<p class="flow-text">
-								Aplikasi SIEMAK Android 0.1b ini digunakan untuk memudahkan mahasiswa untuk melakukan penilaian terhadap
-								kinerja dosen saat melakukan kegiatan akademik yang bertempat di kelas.
-							
-								Aplikasi ini juga terintegrasi dengan data Siakad Trunojoyo sehingga memudahkan mahasiswa dengan sistem single sign in.
-								Untuk mahasiswa, 
-								silahkan login menggunakan <b>NRP</b> sebagai username dan <b>password siakad</b> sebagai password
-							</p>
-							<p>
-								Info developer : <a href="http://siemak.web.id" target="_blank">KLIK</a> 
-							</p>
+								<p class="flow-text">
+									Aplikasi SIEMAK Android 0.1b ini digunakan untuk memudahkan mahasiswa untuk melakukan penilaian terhadap
+									kinerja dosen saat melakukan kegiatan akademik yang bertempat di kelas.
+								
+									Aplikasi ini juga terintegrasi dengan data Siakad Trunojoyo sehingga memudahkan mahasiswa dengan sistem single sign in.
+									Untuk mahasiswa, 
+									silahkan login menggunakan <b>NRP</b> sebagai username dan <b>password siakad</b> sebagai password
+								</p>
+								<p>
+									Info developer : <a href="http://siemak.web.id" target="_blank">KLIK</a> 
+								</p>
 							</small>
-							<a href="status_koneksi.html">Status Koneksi</a>
 						</span>
 					</li>
 				</ul>
@@ -122,7 +96,6 @@
 						 </button>
 					</div>
 				</form>
-				<button onclick="onLoad()">A dialog</button>
 			</div>
 		</div>
 
@@ -133,6 +106,5 @@
 				</div>
 			</div>
 		</footer>
-		
 	</body>
 </html>
