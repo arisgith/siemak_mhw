@@ -1,3 +1,6 @@
+function onBackKeyDown2() {
+	 navigator.app.exitApp();
+}
 	function toast(a){
 				Materialize.toast('Anda Ingin Keluar? '+a+' <button onclick="onBackKeyDown2()" class="btn red">Ya</button>', 4000)
 			}
