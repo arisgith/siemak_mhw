@@ -6,6 +6,60 @@
 
 		<!--Let browser know website is optimized for mobile-->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<!--  Scripts-->
+		<script src="js/jquery-2.1.1.min.js"></script>
+		<script src="js/materialize.js"></script>
+		<script src="js/init.js"></script>
+		 <script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
+		<script>
+			function validationcheck(){
+				if ($("#username").val() == "") {
+
+					alert("Mohon Masukan NRP.");
+
+					$("#username").focus(); 
+					return false;
+
+				}
+				
+				else if ($("#pass").val() == "") {
+
+					alert("Mohon Masukan Password.");
+
+					$("#pass").focus();
+					return false;
+				}
+			}
+		</script>
+		<script type="text/javascript" charset="utf-8">
+
+			// Wait for device API libraries to load
+			//
+			document.addEventListener("deviceready", onDeviceReady, false);
+
+			// device APIs are available
+			//
+			function onDeviceReady() {
+				checkConnection();
+			}
+
+				function checkConnection() {
+					var networkState = navigator.connection.type;
+
+					var states = {};
+					states[Connection.UNKNOWN]  = 'Unknown connection';
+					states[Connection.ETHERNET] = 'Ethernet connection';
+					states[Connection.WIFI]     = 'WiFi connection';
+					states[Connection.CELL_2G]  = 'Cell 2G connection';
+					states[Connection.CELL_3G]  = 'Cell 3G connection';
+					states[Connection.CELL_4G]  = 'Cell 4G connection';
+					states[Connection.CELL]     = 'Cell generic connection';
+					states[Connection.NONE]     = 'No network connection';
+
+					alert('Connection type: ' + states[networkState]);
+				}
+
+		</script>
 	</head>
 
 	<body>
@@ -79,59 +133,6 @@
 				</div>
 			</div>
 		</footer>
-		<!--  Scripts-->
-		<script src="js/jquery-2.1.1.min.js"></script>
-		<script src="js/materialize.js"></script>
-		<script src="js/init.js"></script>
-		 <script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
-		<script>
-			function validationcheck(){
-				if ($("#username").val() == "") {
-
-					alert("Mohon Masukan NRP.");
-
-					$("#username").focus(); 
-					return false;
-
-				}
-				
-				else if ($("#pass").val() == "") {
-
-					alert("Mohon Masukan Password.");
-
-					$("#pass").focus();
-					return false;
-				}
-			}
-		</script>
-		<script type="text/javascript" charset="utf-8">
-
-			// Wait for device API libraries to load
-			//
-			document.addEventListener("deviceready", onDeviceReady, false);
-
-			// device APIs are available
-			//
-			function onDeviceReady() {
-				checkConnection();
-			}
-
-				function checkConnection() {
-					var networkState = navigator.connection.type;
-
-					var states = {};
-					states[Connection.UNKNOWN]  = 'Unknown connection';
-					states[Connection.ETHERNET] = 'Ethernet connection';
-					states[Connection.WIFI]     = 'WiFi connection';
-					states[Connection.CELL_2G]  = 'Cell 2G connection';
-					states[Connection.CELL_3G]  = 'Cell 3G connection';
-					states[Connection.CELL_4G]  = 'Cell 4G connection';
-					states[Connection.CELL]     = 'Cell generic connection';
-					states[Connection.NONE]     = 'No network connection';
-
-					alert('Connection type: ' + states[networkState]);
-				}
-
-		</script>
+		
 	</body>
 </html>
